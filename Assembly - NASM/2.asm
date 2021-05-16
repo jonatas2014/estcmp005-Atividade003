@@ -1,4 +1,4 @@
-section .data
+section .data ;Constants variables section
 
     msg1 db "Informe um número: ", 0xA, 0xD
     len_msg1 equ $ - msg1
@@ -7,14 +7,14 @@ section .data
     msg3 db "O maior entre eles é: ", 0xA, 0xD
     len_msg3 equ $ - msg3
 
-section .bss
+section .bss ;Non constant variables section
 
-    ;vatáveis que podem armazenar até 6 bytes de informação
+    ;variables that can store 6 bytes of information
     num1 resb 6 
     num2 resb 6
     num_greater resb 6
 
-section .text
+section .text ;Code section
     global _start
 
     _start:
@@ -48,10 +48,8 @@ section .text
         int 0x80   ;call kernel
 
         mov eax, [num1] ;move first number to eax
-        ;sub eax, '0'    ;converts the ASCII input to decimal
-
+        
         mov ebx, [num2] ;move second number to ebx
-        ;sub ebx, '0'    ;converts the ASCII input to decimal
        
         ;comparisson
         cmp eax, ebx ;is eax > ebx?
@@ -62,9 +60,6 @@ section .text
 
         _exit:
 
-            ;converts its contents to ASCII
-            ;so that it can be showes in stdout
-            ;add eax, '0' 
             ;moves grater number into num_greater memory location
             mov   [num_greater], eax 
             
